@@ -1,70 +1,101 @@
-# Getting Started with Create React App
+# News Aggregator React Application
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Table of Contents
+- [Introduction](#introduction)
+- [Folder Structure](#folder-structure)
+- [Libraries Used](#libraries-used)
+- [Environment Variables](#environment-variables)
+- [Docker Setup](#docker-setup)
+- [Running the Application](#running-the-application)
 
-## Available Scripts
+## Introduction
+This is a simple news aggregator application built with React that fetches news articles from various sources. The app includes filtering capabilities, infinite scrolling, and a responsive design using Material UI and Tailwind CSS. It is Dockerized for easy deployment.
 
-In the project directory, you can run:
+## Folder Structure
+The project structure is organized as follows:
 
-### `npm start`
+```plaintext
+news-aggregator/
+├── node_modules/          
+├── public/                
+├── src/                   
+│   ├── components/
+│   ├── Article/
+│   │   ├── ArticleCard.js
+│   │   └── ArticleList.js
+│   ├── Navbar/
+│   │   ├── Filter/
+│   │   │   ├── FilterContainer.js
+│   │   │   └── index.js
+│   ├── UserPreferences/
+│   │   ├── UserPreferencesContainer.js
+│   │   └── index.js
+│   ├── SearchBar.js
+│   └── Shared/
+│       ├── CustomButton.js
+│       ├── InputSelect.js
+│       └── Modal.js
+├── config/
+│   └── config.js
+├── contexts/
+│   └── NewsContext.js
+├── pages/
+│   ├── NewsContentPage.js
+│   └── StarterPage.js
+│── utils/
+│──  └── utils.js   
+├── .env                 
+├── .gitignore           
+├── Dockerfile            
+├── docker-compose.yml     
+├── package.json          
+├── README.md             
+├── tailwind.config.js    
+└── postcss.config.js    
+```
+## Key Folders
+- **`components/`**: Contains reusable React components such as buttons, modals, and form elements.
+- **`config/`**: Holds configuration files, including API endpoints and keys.
+- **`contexts/`**: Contains React Context files used for managing global application state.
+- **`pages/`**: Contains different page components, like the main news feed page.
+- **`utils/`**: Contains utility functions, like date formatting and debouncing.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Libraries Used
+The application leverages several libraries for its functionality and styling:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- **[React](https://reactjs.org/)**: A JavaScript library for building user interfaces.
+- **[Material-UI](https://mui.com/)**: A popular React UI framework for implementing Google's Material Design.
+- **[Tailwind CSS](https://tailwindcss.com/)**: A utility-first CSS framework for styling the application.
+- **[React Infinite Scroll Component](https://www.npmjs.com/package/react-infinite-scroll-component)**: A component to implement infinite scrolling for loading more content as the user scrolls down.
+- **[Lodash Debounce](https://lodash.com/docs/4.17.15#debounce)**: A Lodash function that delays the processing of an input function until after a specified time period.
 
-### `npm test`
+## Docker Setup
+The application is Dockerized, allowing you to run it in a containerized environment.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Dockerfile
+The `Dockerfile` is located in the root of the project and is configured to:
 
-### `npm run build`
+1. Use the Node.js 16 Alpine image as the base.
+2. Set the working directory to `/app`.
+3. Copy `package.json` and `package-lock.json` to the working directory.
+4. Install dependencies using `npm install`.
+5. Copy the rest of the application files to the working directory.
+6. Expose port 3000.
+7. Start the app in development mode using `npm start`.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Running the Application
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Environment Variables
+Environment variables are managed in the `.env` file. Make sure to set the following variables in `.env` or you can simply rename the `.env.example` to `.env`:
 
-### `npm run eject`
+```bash
+REACT_APP_API_BASE_URL=https://newsapi.org/v2/everything
+REACT_APP_API_KEY=your_api_key_here
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Once you set the env variables, you just need to use the following command to run the application.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```bash
+docker-compose up
+```
